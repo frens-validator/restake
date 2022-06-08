@@ -35,11 +35,13 @@
     "stream": "^0.0.2",
     "web-vitals": "^2.1.4"
   },
+  "main": "src/exports.js",
   "scripts": {
     "start": "npx parcel src/index.html",
     "prebuild": "rm -rf dist/",
     "build": "npx parcel build src/index.html",
-    "autostake": "NODE_OPTIONS=--openssl-legacy-provider node scripts/autostake.mjs"
+    "_autostake": "NODE_OPTIONS=--openssl-legacy-provider node scripts/autostake.mjs",
+    "autostake": "NODE_OPTIONS=--openssl-legacy-provider  doppler run -- node scripts/autostake.mjs"
   },
   "eslintConfig": {
     "extends": [
