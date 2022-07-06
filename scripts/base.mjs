@@ -148,7 +148,7 @@ export class Autostake {
       Slip10RawIndex.hardened(slip44),
       Slip10RawIndex.hardened(0),
       Slip10RawIndex.normal(0),
-      Slip10RawIndex.normal(0),
+      Slip10RawIndex.normal(1),
     ];
     slip44 != 118 && timeStamp('Using HD Path', pathToString(hdPath))
 
@@ -158,7 +158,7 @@ export class Autostake {
     });
 
     if(network.slip44 === 60){
-      return await this.getEthWallet(network, wallet)
+      return await this.getEthWallet(network, wallet, pathToString(hdPath))
     }
 
     const accounts = await wallet.getAccounts()
