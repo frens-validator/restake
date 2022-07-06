@@ -62,6 +62,7 @@ class Network {
     this.operators = (this.data.operators || this.validators.filter(el => el.restake && this.allowOperator(el.operator_address))).map(el => {
       return Operator(el)
     })
+
     this.operatorCount = this.operators.length
     this.prettyName = this.chain.prettyName
     this.chainId = this.chain.chainId

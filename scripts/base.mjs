@@ -116,6 +116,7 @@ export class Autostake {
     }
 
     const operator = network.getOperatorByBotAddress(botAddress)
+    console.log(operator)
     if (!operator) return timeStamp('Not an operator')
 
     if (!network.authzSupport) return timeStamp('No Authz support')
@@ -167,8 +168,8 @@ export class Autostake {
     return { wallet, botAddress, slip44 }
   }
 
-  async getEthWallet(network, signer){
-    const wallet = Wallet.fromMnemonic(this.mnemonic);
+  async getEthWallet(network, signer, path){
+    const wallet = Wallet.fromMnemonic(this.mnemonic, path);
     const ethereumAddress = await wallet.getAddress();
     const data = ETH.decoder(ethereumAddress);
     const botAddress = Bech32.encode(network.prefix, Bech32.toWords(data))
@@ -276,10 +277,16 @@ export class Autostake {
 
     let autostakeAmount = floor(totalRewards)
 
-    if (smaller(bignumber(autostakeAmount), bignumber(client.operator.minimumReward))) {
+   
+    console.log('DATA',client.network.data)
+    const minimumReward = client.network.data.autostake?.minimumReward || client.operator.minimumReward
+    if (smaller(bignumber(autostakeAmount), bignumber(minimumReward))) {
       timeStamp(address, autostakeAmount, client.network.denom, 'reward is too low, skipping')
       return
+    } else {
+      timeStamp(address, autostakeAmount, client.network.denom, 'would restake', minimumReward)
     }
+    return
 
     if (grant.maxTokens){
       if(smallerEq(grant.maxTokens, 0)) {
