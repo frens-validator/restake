@@ -83,12 +83,12 @@ async function SigningClient(network, defaultGasPrice, signer, key) {
 
   // vendored to handle large integers
   // https://github.com/cosmos/cosmjs/blob/0f0c9d8a754cbf01e17acf51d3f2dbdeaae60757/packages/stargate/src/fee.ts
-  function calculateFee(gasLimit, gasPrice) {
+  function calculateFee(gasLimit, gasPrice, defaultFee) {
     const processedGasPrice = typeof gasPrice === "string" ? GasPrice.fromString(gasPrice) : gasPrice;
     const { denom, amount: gasPriceAmount } = processedGasPrice;
     const amount = ceil(bignumber(multiply(bignumber(gasPriceAmount.toString()), bignumber(gasLimit.toString()))));
     return {
-      amount: [coin(amount, denom)],
+      amount: defaultFee ? [coin(defaultFee, denom)] : [coin(amount, denom)],
       gas: gasLimit.toString(),
       gasLimit: gasLimit.toString()
     };
