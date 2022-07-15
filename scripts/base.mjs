@@ -278,15 +278,11 @@ export class Autostake {
     let autostakeAmount = floor(totalRewards)
 
    
-    console.log('DATA',client.network.data)
     const minimumReward = client.network.data.autostake?.minimumReward || client.operator.minimumReward
     if (smaller(bignumber(autostakeAmount), bignumber(minimumReward))) {
       timeStamp(address, autostakeAmount, client.network.denom, 'reward is too low, skipping')
       return
-    } else {
-      timeStamp(address, autostakeAmount, client.network.denom, 'would restake', minimumReward)
     }
-    return
 
     if (grant.maxTokens){
       if(smallerEq(grant.maxTokens, 0)) {
