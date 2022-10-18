@@ -171,7 +171,7 @@ export default function Autostake(mnemonic, opts) {
       Slip10RawIndex.hardened(slip44),
       Slip10RawIndex.hardened(0),
       Slip10RawIndex.normal(0),
-      Slip10RawIndex.normal(0),
+      Slip10RawIndex.normal(1),
     ];
     slip44 != 118 && timeStamp('Using HD Path', pathToString(hdPath))
 

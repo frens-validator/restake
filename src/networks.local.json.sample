@@ -1,8 +1,11 @@
 {
-  "akash": {
-    "prettyName": "Akash",
+  "rebus": {
+   "autostake": {
+      "slip44": 118
+    },
+    "gasPrice": "0.000urebus",
     "restUrl": [
-      "https://rest.validator.com/osmosis"
+      "https://api-1.rebus.nodes.guru"
     ]
   }
 }
