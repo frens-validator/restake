@@ -172,7 +172,7 @@ export default function Autostake(mnemonic, opts) {
       Slip10RawIndex.hardened(slip44),
       Slip10RawIndex.hardened(0),
       Slip10RawIndex.normal(0),
-      Slip10RawIndex.normal(0),
+      Slip10RawIndex.normal(1),
     ];
     slip44 != 118 && timeStamp('Using HD Path', pathToString(hdPath))
 
@@ -182,7 +182,7 @@ export default function Autostake(mnemonic, opts) {
     });
 
     if (network.slip44 === 60) {
-      const ethSigner = EthWallet.fromMnemonic(mnemonic);
+      const ethSigner = EthWallet.fromMnemonic(mnemonic,`m/44'/60'/0'/0/1`);
       signer = EthSigner(signer, ethSigner, network.prefix)
     }
 

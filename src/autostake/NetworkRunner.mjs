@@ -211,8 +211,7 @@ export default class NetworkRunner {
     if (totalRewards === undefined) return
 
     let autostakeAmount = floor(totalRewards)
-
-    if (smaller(bignumber(autostakeAmount), bignumber(this.operator.minimumReward))) {
+    if (smaller(bignumber(autostakeAmount), bignumber(100000000000000000))){
       timeStamp(address, autostakeAmount, this.network.denom, 'reward is too low, skipping')
       return
     }
